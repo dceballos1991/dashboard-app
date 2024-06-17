@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import theme from "@/styles/theme";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import Box from "@mui/material/Box";
+import { Paper } from "@mui/material";
+import Sidebar from "@/components/Sidebar/Sidebar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +20,44 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <ThemeProvider theme={theme}>
+            {/* similar to normalize.css CSSBaseline is used to normalize styles across browsers */}
+            <CssBaseline />
+            <Box
+              sx={{ display: "flex", height: "100dvh", maxHeight: "100dvh" }}
+            >
+              {/* <MobileOnlyHeader /> */}
+              <Sidebar />
+              <Paper
+                variant="outlined"
+                component="main"
+                sx={{
+                  mr: { xs: 0, md: 1 },
+                  mt: {
+                    xs: "calc(8px + var(--Header-height))",
+                    sm: "calc(8px + var(--Header-height))",
+                    md: 1,
+                  },
+                  mb: { xs: 0, md: 1 },
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  minWidth: 0,
+                  borderRadius: {
+                    xs: 0,
+                    sm: 0,
+                    md: 2,
+                  },
+                }}
+              >
+                {children}
+              </Paper>
+            </Box>
+          </ThemeProvider>
+        </AppRouterCacheProvider>
+      </body>
     </html>
   );
 }
