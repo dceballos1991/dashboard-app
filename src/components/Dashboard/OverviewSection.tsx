@@ -1,13 +1,14 @@
 import { borderStyles } from "@/src/styles/theme";
 import Box from "@mui/material/Box";
 import OverviewToolbar from "./OverviewToolbar";
+import OverviewStats from "./OverviewStats";
 
 export default function OverviewSection() {
   return (
     <Box
       sx={{
         display: "flex",
-        direction: "column",
+        flexDirection: "column",
         gap: {
           xs: 1,
           md: 2,
@@ -15,14 +16,11 @@ export default function OverviewSection() {
         alignItems: "center",
         bgcolor: "grey.50",
         borderBottom: borderStyles,
-        p: {
-          xs: 1,
-          md: 2,
-        },
+        pt: 1,
       }}
     >
       <OverviewToolbar />
-      {/* <OverviewStats /> */}
+      <OverviewStats />
     </Box>
   );
 }

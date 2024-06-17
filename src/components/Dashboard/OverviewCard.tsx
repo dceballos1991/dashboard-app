@@ -1,3 +1,5 @@
+"use client";
+import { useDashboard } from "@/src/context/Dashboard";
 import { AddCircleOutline, RemoveCircleOutline } from "@mui/icons-material";
 import { Box, Card, Skeleton, Typography } from "@mui/material";
 import { ReactNode } from "react";
@@ -5,7 +7,7 @@ import { ReactNode } from "react";
 type OverviewCardProps = {
   title: string;
   icon: ReactNode;
-  isLoading: boolean;
+  isLoading?: boolean;
   data?: {
     value: number;
     change: {
@@ -15,23 +17,52 @@ type OverviewCardProps = {
   };
 };
 
+const mapRangeToLabel = {
+  daily: "last day",
+  weekly: "last week",
+  monthly: "last month",
+};
+
 export default function OverviewCard({
   title,
   icon,
   isLoading,
   data,
 }: OverviewCardProps) {
+  const { range } = useDashboard();
+
   return (
-    <Card>
+    <Card
+      sx={{
+        color: "grey.500",
+        p: 1,
+        borderRadius: 2,
+        display: "flex",
+        flexDirection: "column",
+        gap: 1,
+      }}
+    >
       <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
         {icon}
-        <Typography variant="h6">{title}</Typography>
+        <Typography variant="subtitle2">{title}</Typography>
       </Box>
       {!isLoading && !!data ? (
-        <>
-          <Typography variant="h4">{data.value}</Typography>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            justifyContent: "space-between",
+          }}
+        >
           <Typography
-            variant="body2"
+            variant="subtitle1"
+            sx={{ fontWeight: "bold", color: "grey.900" }}
+          >
+            {data.value}
+          </Typography>
+          <Typography
+            variant="caption"
             sx={{
               display: "flex",
               alignItems: "center",
@@ -40,15 +71,22 @@ export default function OverviewCard({
             }}
           >
             {data.change.positive ? (
-              <AddCircleOutline />
+              <AddCircleOutline fontSize="small" />
             ) : (
-              <RemoveCircleOutline />
+              <RemoveCircleOutline fontSize="small" />
             )}
-            {data.change.percentage}%
+            {data.change.percentage}%{" "}
+            <Typography
+              component="span"
+              variant="caption"
+              sx={{ color: "grey.500" }}
+            >
+              {mapRangeToLabel[range] ?? ""}
+            </Typography>
           </Typography>
-        </>
+        </Box>
       ) : (
-        <Skeleton variant="rectangular" width="100%" height={100} />
+        <Skeleton variant="rectangular" width="100%" height={"1.75em"} />
       )}
     </Card>
   );

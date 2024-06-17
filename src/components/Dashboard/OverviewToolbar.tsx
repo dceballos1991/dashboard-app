@@ -17,6 +17,10 @@ export default function OverviewToolbar() {
           xs: 1,
           md: 2,
         },
+        px: {
+          xs: 1,
+          md: 2,
+        },
         alignItems: "center",
       }}
     >

@@ -8,12 +8,14 @@ import { borderStyles } from "../styles/theme";
 import HeaderToolbar from "../components/Dashboard/HeaderToolbar";
 import { DashboardProvider } from "../context/Dashboard";
 import OverviewSection from "../components/Dashboard/OverviewSection";
+import MainGrid from "../components/Dashboard/MainGrid";
 
 export default function Dashboard() {
   return (
     <DashboardProvider>
       <HeaderToolbar />
       <OverviewSection />
+      <MainGrid />
     </DashboardProvider>
   );
 }

@@ -11,6 +11,8 @@ export const useMockedApi = <T>(getData: () => Promise<T>) => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
+        setIsError(false);
         const data = await getData();
         // Throw an error 5% of the time
         if (Math.random() > 0.95) {

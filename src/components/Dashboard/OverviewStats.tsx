@@ -1,8 +1,11 @@
+"use client";
+
 import { useDashboard } from "@/src/context/Dashboard";
 import { AddBusiness, People, PeopleAlt } from "@mui/icons-material";
 import { Alert } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Unstable_Grid2";
 import OverviewCard from "./OverviewCard";
+import { useOverviewStats } from "@/src/services/hooks/overview-stats";
 
 const OVERVIEW_CARDS = [
   {
@@ -32,30 +35,52 @@ export default function OverviewStats() {
 
   if (isLoading)
     return (
-      <Grid2 columns={{ xs: 1, sm: 2, md: 4 }} gap={{ xs: 1, sm: 2 }}>
+      <Grid container spacing={{ xs: 1, sm: 2 }} sx={{ width: "100%" }}>
         {OVERVIEW_CARDS.map((card) => (
-          <OverviewCard
-            key={card.id}
-            title={card.title}
-            icon={card.icon}
-            isLoading
-          />
+          <Grid key={card.id} xs={12} sm={6} md={3}>
+            <OverviewCard
+              key={card.id}
+              title={card.title}
+              icon={card.icon}
+              isLoading
+            />
+          </Grid>
         ))}
-      </Grid2>
+      </Grid>
     );
 
-  if (isError) return <Alert severity="error">Failed to load data</Alert>;
+  if (isError)
+    return (
+      <Alert severity="error">
+        {
+          "Failed to load data (JK, the error was thrown on purpose to test error handling"
+        }
+      </Alert>
+    );
 
   return (
-    <Grid2 columns={{ xs: 1, sm: 2, md: 4 }} gap={{ xs: 1, sm: 2 }}>
-      {OVERVIEW_CARDS.map((card) => (
-        <OverviewCard
-          key={card.id}
-          title={card.title}
-          icon={card.icon}
-          data={data[card.id]}
-        />
-      ))}
-    </Grid2>
+    <Grid
+      container
+      spacing={{ xs: 1, sm: 2 }}
+      sx={{
+        width: "100%",
+        pb: 1,
+        px: {
+          xs: 0.5,
+          md: 1,
+        },
+      }}
+    >
+      {data &&
+        OVERVIEW_CARDS.map((card) => (
+          <Grid key={card.id} xs={12} sm={6} md={3}>
+            <OverviewCard
+              title={card.title}
+              icon={card.icon}
+              data={data[card.id as keyof typeof data]}
+            />
+          </Grid>
+        ))}
+    </Grid>
   );
 }
