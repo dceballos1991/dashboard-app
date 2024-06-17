@@ -1,15 +1,8 @@
 "use client";
-import { closeSidebar } from "@/styles/utils";
-import {
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  Typography,
-} from "@mui/material";
+import { closeSidebar } from "@/src/styles/utils";
+import { Divider, List, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import GlobalStyles from "@mui/material/GlobalStyles";
-import IconButton from "@mui/material/IconButton";
 import { useCallback, useState } from "react";
 import SidebarToggle from "./SidebarToggle";
 import Logo from "./Logo";
@@ -121,6 +114,11 @@ export default function Sidebar() {
         display: "flex",
         flexDirection: "column",
         gap: 2,
+        bgcolor: "grey.200",
+        boxShadow: {
+          xs: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+          md: "none",
+        },
       }}
     >
       <GlobalStyles
@@ -128,9 +126,12 @@ export default function Sidebar() {
           ":root": {
             "--Minimized-Sidebar-width": "66px",
             "--Is-Sidebar-minimized": isMinimized ? 1 : 0,
-            "--Sidebar-width": isMinimized
-              ? "var(--Minimized-Sidebar-width)"
-              : "220px",
+            "--Sidebar-width": "220px",
+            [theme.breakpoints.up("md")]: {
+              "--Sidebar-width": isMinimized
+                ? "var(--Minimized-Sidebar-width)"
+                : "220px",
+            },
             [theme.breakpoints.up("lg")]: {
               "--Sidebar-width": isMinimized
                 ? "var(--Minimized-Sidebar-width)"
@@ -149,7 +150,7 @@ export default function Sidebar() {
           width: "100vw",
           height: "100vh",
           opacity: "var(--SideNavigation-slideIn)",
-          backgroundColor: "var(--palette-background-backdrop)",
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
           transition: "opacity 0.4s",
           transform: {
             xs: "translateX(calc(100% * (var(--SideNavigation-slideIn, 0) - 1) + var(--SideNavigation-slideIn, 0) * var(--Sidebar-width, 0px)))",

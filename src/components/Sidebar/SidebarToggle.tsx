@@ -10,7 +10,14 @@ export default function SidebarToggle({
   onToggle: () => void;
 }) {
   return (
-    <IconButton color="primary" size="small" onClick={onToggle}>
+    <IconButton
+      color="primary"
+      size="small"
+      onClick={onToggle}
+      sx={{
+        display: { xs: "none", md: "block" },
+      }}
+    >
       {isMinimized ? (
         <ChevronRight />
       ) : (

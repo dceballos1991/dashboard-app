@@ -3,6 +3,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Typography from "@mui/material/Typography";
 import { usePathname } from "next/navigation";
 import NextLink from "next/link";
+import { outlinedButtonStyles } from "@/src/styles/theme";
 
 export default function SidebarLink({
   icon,
@@ -35,13 +36,8 @@ export default function SidebarLink({
           fontSize: "1.25rem",
         },
         "&.Mui-selected": {
-          bgcolor: "grey.50",
-          "& p": {
-            color: "grey.700",
-          },
-
+          ...outlinedButtonStyles,
           "& svg": {
-            color: "grey.700",
             fontSize: "1.25rem",
           },
           "&:hover": {
