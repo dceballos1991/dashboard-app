@@ -98,7 +98,12 @@ const Calendar = () => {
                 padding: "16px",
               }}
             >
-              <Typography variant="body2">{day}</Typography>
+              <Typography
+                variant="body2"
+                data-testid={isToday(day) ? "today" : day}
+              >
+                {day}
+              </Typography>
             </Box>
           </Grid>
         ))}

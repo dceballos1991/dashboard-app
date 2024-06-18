@@ -86,7 +86,12 @@ export default function OverviewCard({
           </Typography>
         </Box>
       ) : (
-        <Skeleton variant="rectangular" width="100%" height={"1.75em"} />
+        <Skeleton
+          data-testid="loading-skeleton"
+          variant="rectangular"
+          width="100%"
+          height={"1.75em"}
+        />
       )}
     </Card>
   );
