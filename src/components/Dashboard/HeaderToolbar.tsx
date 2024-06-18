@@ -11,7 +11,7 @@ export default function HeaderToolbar() {
   return (
     <Box
       sx={{
-        py: 1.5,
+        py: 1,
         pl: {
           xs: 1,
           md: 4,
