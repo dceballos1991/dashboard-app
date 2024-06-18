@@ -16,7 +16,6 @@ export const outlinedButtonStyles = {
   color: "#475569",
   backgroundColor: "#f8fafc",
   borderRadius: "8px",
-  textTransform: "none",
   boxShadow,
 };
 
@@ -24,7 +23,6 @@ export const containedButtonStyles = {
   border: borderStyles,
   backgroundColor: "#FA5B3D",
   borderRadius: "8px",
-  textTransform: "none",
   boxShadow,
 };
 
@@ -90,11 +88,14 @@ const theme = createTheme({
       variants: [
         {
           props: { variant: "outlined" },
-          style: outlinedButtonStyles,
+          style: {
+            ...outlinedButtonStyles,
+            textTransform: "none",
+          },
         },
         {
           props: { variant: "contained" },
-          style: containedButtonStyles,
+          style: { ...containedButtonStyles, textTransform: "none" },
         },
       ],
     },
@@ -102,7 +103,10 @@ const theme = createTheme({
       variants: [
         {
           props: { color: "secondary" },
-          style: outlinedButtonStyles,
+          style: {
+            ...outlinedButtonStyles,
+            textTransform: "none",
+          },
         },
       ],
     },
