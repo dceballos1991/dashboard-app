@@ -35,7 +35,18 @@ export default function OverviewStats() {
 
   if (isLoading)
     return (
-      <Grid container spacing={{ xs: 1, sm: 2 }} sx={{ width: "100%" }}>
+      <Grid
+        container
+        spacing={{ xs: 1, sm: 2 }}
+        sx={{
+          width: "100%",
+          pb: 1,
+          px: {
+            xs: 0.5,
+            md: 1,
+          },
+        }}
+      >
         {OVERVIEW_CARDS.map((card) => (
           <Grid key={card.id} xs={12} sm={6} md={3}>
             <OverviewCard
@@ -51,9 +62,9 @@ export default function OverviewStats() {
 
   if (isError)
     return (
-      <Alert severity="error">
+      <Alert severity="error" sx={{ mb: 2 }}>
         {
-          "Failed to load data (JK, the error was thrown on purpose to test error handling"
+          "Failed to load data (JK, the error was thrown on purpose to test error handling)"
         }
       </Alert>
     );
